@@ -1,0 +1,14 @@
+<%- include header %>
+
+	<% for (var i = 0; i < blogs.length; i++) { %>
+		<div id="blog">
+			<h4><%= blogs[i].title%></h4>
+			<p id="content"><%= blogs[i].content%></p>
+			<span><a href="#" id="name"><%= blogs[i].userName%></a></span>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="time"><%= String(blogs[i].postDate).substr(0,24)%></span>
+			<p />
+		</div>
+		<br />
+	<% } %>
+
+<%- include footer %>

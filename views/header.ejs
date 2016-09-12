@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bolg</title>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+</head>
+<body>
+
+	<header>
+    	<h1><%= title %></h1>
+	</header>
+	<!-- <div id="naver"> -->
+    <nav>
+    	<!-- <span><a title="主页" href="/">主页</a></span>
+    	<span><a title="登录" href="/login">登录</a></span>
+    	<span><a title="注册" href="/reg">注册</a></span> -->
+
+    	<!-- 根据当前所属的页面显示不同的导航 -->
+    	<% if (state && state == 'unlogined') { %>
+    		<span><a title="主页" href="/">主页</a></span>
+    		<span><a title="登录" href="/login">登录</a></span>
+    		<span><a title="注册" href="/reg">注册</a></span>
+    	<% } else if (state && state == 'logined') { %>
+    		<span><a title="主页" href="/">主页</a></span>
+    		<span><a title="注册" href="/reg">注册</a></span>
+    		<span><a title="退出登录" href="/logout">退出登录</a></span>
+    		<br />
+    		<span><a title="发表博文" href="/post">发表博文</a></span>
+    	<% } %>
+    		
+
+	<!-- </div> -->
+    </nav>
+
+	<article>

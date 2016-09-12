@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bolg</title>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+</head>
+<body>
+
+	<header>
+    	<h1><%= title %></h1>
+	</header>
+	<nav>
+    	<span><a title="主页" href="/">主页</a></span>
+    	<span><a title="注册" href="/reg">注册</a></span>
+    	<span><a title="退出登录" href="/logout">退出登录</a></span>
+		<br />
+		<span><a title="发表博文" href="/post">发表博文</a></span> 		
+
+	</nav>
+
+	<article>
+
+		<fieldset>
+   	 		<legend>Your new blog</legend>
+   	 			<br />
+				<form action="post" method="post">
+					标题：<input type="text" name="title" /><br /><br />
+					<span style="vertical-align: top">内容：</span><textarea name="content" rows="20" cols="60"></textarea><br /><br />
+					<input type="submit" value="发表" /><br /><br />
+				</form>
+		</fieldset>
+
+	</article>
+</body>
+</html>
