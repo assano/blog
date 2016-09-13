@@ -27,7 +27,7 @@ article a:hover{color: #333333; text-decoration: underline;}
 
 .info{font-size: 14px; }
 
-#blog{background-color: #dddddd; margin: 2px auto; padding: 2px 0px 2px 2px; }
+#blog{background-color: #dddddd; margin: 2px auto; padding: 2px; }
 
 #content{font-size: 15px;}
 

@@ -75,8 +75,8 @@ router.post('/reg', function(req, res, next) {
 			}
 			req.session.user = user;  //用户信息存入session
 			req.flash('success', '注册成功!');
-			res.redirect('/');        //注册成功后返回主页
-			console.log('session:' + req.session.user);
+			return res.redirect('/');        //注册成功后返回主页
+			// console.log('session:' + req.session.user);
 		});
 	});
 
@@ -139,6 +139,10 @@ router.get('/post', function(req, res, next) {
 });
 //发表
 router.post('/post', function(req, res, next) {
+	//若session过期，则需要重新登录
+	if (!req.session.user) {
+		return res.redirect('/login');
+	}
 	//获得前端传来的博文
 	console.log('=========session=======:' + req.session.user);
 	var newBlog = new Blog({
