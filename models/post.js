@@ -1,4 +1,5 @@
 var mongodb = require('./db');
+var objectid = require('objectid');
 
 function Blog(blog) {
 	this.title = blog.title; 
@@ -80,13 +81,6 @@ Blog.getAll = function(callback) {
 				return callback(err);
 			}
 			//查找用户名为name 的博文   ==================未分页
-			// collection.find({}, function(err, blogs) {
-			// 	mongodb.close();
-			// 	if (err) {
-			// 		return callback(err);
-			// 	}
-			// 	callback(blogs);
-			// });
 			collection.find({}).toArray(function(err, docs) {
 				mongodb.close();
 				if (err) {
@@ -98,5 +92,60 @@ Blog.getAll = function(callback) {
 		});
 	});
 }
+
+//分页读取微博
+Blog.getBlogsByPage = function(page, callback) {
+	//打开数据库
+	mongodb.open(function(err, db) {
+		if (err) {
+			console.log('mongo get error');
+			return callback(err);
+		}
+		//读取blogs集合
+		db.collection('blogs', function(err, collection) {
+			if (err) {
+				mongodb.close();
+				return callback(err);
+			}
+			//分页读取微博
+			collection.find({}).sort({postDate: -1}).skip((page-1) * 5).limit(5).toArray(function (err, docs) {
+				mongodb.close();
+				if (err) {
+					return callback(err);
+				}
+				callback(docs);
+			})
+		});
+	});
+}
+
+
+//删除一条博文
+Blog.deleteOne = function (id, callback) {
+	//打开数据库
+	mongodb.open(function (err, db) {
+		if (err) {
+			console.log('mongo get error');
+			return callback(err);
+		}
+		//读取blogs集合
+		db.collection('blogs', function (err, collection) {
+			if (err) {
+				mongodb.close();
+				return callback(err);
+			}
+			//删除对应博文
+			collection.deleteOne({"_id": objectid(id)}, function (err, result) {
+				mongodb.close();
+				if (err) {
+					console.log('delete blog err');
+					return callback(err);
+				}
+				callback(result);
+			});
+		});
+	});
+}
+
 
 module.exports = Blog;

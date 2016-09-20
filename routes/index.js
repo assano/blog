@@ -12,15 +12,17 @@ router.get('/hello/', function(req, res, next) {
 
 //主页
 router.get('/', function(req, res, next) {
-
 	//取得已经发表的博文
-	// var blog = new Blog({
-	// 	title: '',
-	// 	content: '',
-	// 	userName: '',
-	// 	postDate: new Date()
+	// Blog.getAll(function(docs) {
+	// 	if (req.session.user) {  //已登录
+	// 		res.render('index', { title: '主页', state: 'logined', blogs: docs});
+	// 	} else {   				 //未登录
+	// 		res.render('index', { title: '主页', state: 'unlogined',  blogs: docs});
+	// 	}
 	// });
-	Blog.getAll(function(docs) {
+
+	//分页取得已经发表的博文
+	Blog.getBlogsByPage(1, function(docs) {
 		if (req.session.user) {  //已登录
 			res.render('index', { title: '主页', state: 'logined', blogs: docs});
 		} else {   				 //未登录
@@ -39,6 +41,7 @@ router.get('/reg', function(req, res, next) {
 		res.render('reg', { title: '注册', state: 'unlogined'});
 	}
 });
+
 //注册
 router.post('/reg', function(req, res, next) {
 	var name = req.body.name;
