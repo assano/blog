@@ -32,6 +32,16 @@ router.get('/', function(req, res, next) {
 
 });
 
+//位ajax提供的接口
+router.get('/more_blogs', function (req, res, next) {
+	//获得查询参数 page
+	var page = req.query.page;
+	Blog.getBlogsByPage(page, function (docs) {
+		res.send(docs);
+		res.end();
+	});
+});
+
 //注册页面
 router.get('/reg', function(req, res, next) {
 	//已登录
@@ -147,7 +157,7 @@ router.post('/post', function(req, res, next) {
 		return res.redirect('/login');
 	}
 	//获得前端传来的博文
-	console.log('=========session=======:' + req.session.user);
+	// console.log('=========session=======:' + req.session.user);
 	var newBlog = new Blog({
 		title: req.body.title,
 		content: req.body.content,
