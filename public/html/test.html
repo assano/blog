@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!--<script type="text/javascript" src="js/ajax.js"></script> &lt;!&ndash; 载入 Ajax 类库 &ndash;&gt;-->
-        <script type="text/javascript" src="javascripts/my_ajax.js"></script>
+        <script type="text/javascript" src="../javascripts/my_ajax.js"></script>
         <title>Ajax 实现无刷新页面</title>
         <style type="text/css">
             body {
@@ -12,7 +12,10 @@
         </style>
     </head>
     <body>
-        <div id="fpage">数据加载中...</div>
+        <!--<div id="fpage" align="center">数据加载中...</div>-->
+        <div id="content" align="center">
 
+        </div>
+        <div id="nextPage" align="center"><a href="#" onclick="moreBlogs()">点击加载更多...</a></div>
     </body>
 </html>

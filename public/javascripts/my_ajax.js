@@ -2,7 +2,7 @@
  * Created by wy on 2016/9/20.
  */
 
-var page = 2;
+var page = 1;
 
 var moreBlogs = function (page) {
     var xhr = new XMLHttpRequest();
@@ -10,11 +10,26 @@ var moreBlogs = function (page) {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
                 console.log(xhr.responseText);
-                page++;
+                //添加DOM元素显示
+                var ele = document.getElementById('content');
+                var jsonArray = JSON.parse(xhr.responseText);
+
+                if (jsonArray.length > 0) {
+                    window.page++;
+                    for (var i = 0; i < jsonArray.length; i++) {
+                        var child = document.createElement('div');
+                        child.innerHTML = jsonArray[i].content;
+                        ele.appendChild(child);
+                    }
+                }
             }
         }
     };
-    var url = 'http://localhost:3000/more_blogs?' + page;
+    var url = 'http://localhost:3000/more_blogs?page=' + window.page;
     xhr.open('GET', url);
     xhr.send(null);
+}
+
+var hello = function () {
+    alert("hello, world");
 }
